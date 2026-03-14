@@ -1,0 +1,23 @@
+spring:
+  redis:
+    url: ${SPRING_REDIS_URL}
+    ssl: ${SPRING_REDIS_SSL:true}
+    timeout: ${SPRING_REDIS_TIMEOUT:10s}
+  data:
+    redis:
+      repositories:
+        enabled: false
+    mongodb:
+      uri: ${DEV_SPRING_DATA_MONGODB_URI}
+      auto-index-creation: ${SPRING_DATA_MONGODB_AUTO_INDEX_CREATION:true}
+
+server:
+  port: ${DEV_SERVER_PORT:8080}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:/journal}
+
+logging:
+  level:
+    org.mongodb.driver.client: WARN
+    org.mongodb.driver.cluster: WARN
+    org.mongodb.driver.connection: WARN

@@ -1,0 +1,37 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+
+# Local environment files
+.env
+.env.*
+.env.example
+
+# Logs / crash dumps
+*.log
+*.pid
+*.seed
+*.stackdump
+hs_err_pid*
+replay_pid*
+
+# Backend build output
+journalApp-backend/target/
+journalApp-backend/package.json
+journalApp-backend/package-lock.json
+journalApp-backend/pnpm-lock.yaml
+journalApp-backend/yarn.lock
+
+# Frontend build / package manager output
+journalapp-frontend/node_modules/
+journalapp-frontend/.next/
+journalapp-frontend/out/
+journalapp-frontend/coverage/
+journalapp-frontend/*.tsbuildinfo
+
+# Local deployment / cache artifacts
+.vercel/
+.pnpm-store/
