@@ -78,9 +78,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.45), transparent 32%),
-    linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%);
+  background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%);
   color: var(--text);
 }
 
@@ -91,7 +89,6 @@ body::before {
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.34), transparent 36%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0)),
     repeating-linear-gradient(
       0deg,
@@ -151,6 +148,11 @@ select:focus-visible,
   border-radius: 999px;
   background: rgba(23, 20, 16, 0.18);
   background-clip: padding-box;
+}
+
+/* Reserve scrollbar space so content doesn’t shift when scrollbar appears (fixes typing jitter) */
+.scrollbar-gutter-stable {
+  scrollbar-gutter: stable;
 }
 
 .paper-noise {
@@ -243,3 +245,4 @@ select:focus-visible,
 .journal-app textarea:focus-visible {
   box-shadow: none;
 }
+

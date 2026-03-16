@@ -18,13 +18,15 @@ public class RedisService {
     public <T> T get(String key, Class<T> entityClass) {
         try {
             Object o = redisTemplate.opsForValue().get(key);
+            if (o == null) {
+                return null;
+            }
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(o.toString(), entityClass);
         } catch (Exception e) {
-            log.error("E");
+            log.warn("Redis get failed for key {}: {}", key, e.getMessage());
             return null;
         }
-
     }
 
     public void set(String key, Object value, Long ttl) {

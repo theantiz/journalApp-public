@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +21,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 @Tag(name = "User APIs", description = "User profile management & weather info")
 @SecurityRequirement(name = "bearerAuth")
 public class UserController {
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -82,9 +88,19 @@ public class UserController {
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean updated = userService.updateUserPassword(authentication.getName(), nextPassword);
+        if (authentication == null || authentication.getName() == null || authentication.getName().isBlank()) {
+            log.warn("Password update attempted with missing or invalid authentication");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Authentication required."));
+        }
 
-        return new ResponseEntity<>(updated ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND);
+        try {
+            boolean updated = userService.updateUserPassword(authentication.getName(), nextPassword);
+            return new ResponseEntity<>(updated ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            log.error("Failed to update user password for {}", authentication.getName(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("message", "Unable to update password. Please try again later."));
+        }
     }
 
     @DeleteMapping

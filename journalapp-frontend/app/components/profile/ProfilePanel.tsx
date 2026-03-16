@@ -122,6 +122,7 @@ export function ProfilePanel() {
           setGreeting("Details ready.");
         }
 
+        // Only show error banner when profile fails; greeting is optional.
         if (profileResult.status === "rejected") {
           setBanner({
             tone: "error",
@@ -129,14 +130,6 @@ export function ProfilePanel() {
               isApiError(profileResult.reason)
                 ? profileResult.reason.message
                 : "Couldn't load this page.",
-          });
-        } else if (greetingResult.status === "rejected") {
-          setBanner({
-            tone: "error",
-            message:
-              isApiError(greetingResult.reason)
-                ? greetingResult.reason.message
-                : "Couldn't refresh the greeting right now.",
           });
         } else {
           setBanner(null);
@@ -347,7 +340,7 @@ export function ProfilePanel() {
               </div>
             ) : null}
 
-            <div className="min-h-0 flex-1 overflow-y-auto">
+            <div className="scrollbar-gutter-stable min-h-0 flex-1 overflow-y-auto">
               <section className="border-b-[0.5px] border-[var(--line)] px-6 py-6 sm:px-8">
                 <div className="grid gap-2">
                   <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--muted)] [font-family:var(--font-dm-mono),monospace]">

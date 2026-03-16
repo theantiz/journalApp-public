@@ -82,10 +82,18 @@ export async function apiRequest<T>(
       removeToken();
     }
 
-    const message =
-      typeof data === "string" && data.trim().length > 0
-        ? data
-        : `Request failed with ${response.status}`;
+    let message: string;
+    if (typeof data === "string" && data.trim().length > 0) {
+      message = data;
+    } else if (data && typeof data === "object" && "message" in data && typeof (data as { message: unknown }).message === "string") {
+      message = (data as { message: string }).message;
+    } else if (data && typeof data === "object" && "error" in data && typeof (data as { error: unknown }).error === "string") {
+      message = (data as { error: string }).error;
+    } else if (response.status >= 500) {
+      message = "Something went wrong on our end. Please try again in a moment.";
+    } else {
+      message = `Request failed with ${response.status}`;
+    }
 
     throw new ApiError(message, response.status, data);
   }

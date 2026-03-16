@@ -60,7 +60,7 @@ export function NotebookPage({
 
   return (
     <main className="min-h-0 min-w-0 bg-[var(--bg)]">
-      <div className="flex h-full min-h-0 items-start justify-center overflow-auto p-4 lg:justify-start lg:p-0">
+      <div className="scrollbar-gutter-stable flex h-full min-h-0 items-start justify-center overflow-auto p-4 lg:justify-start lg:p-0">
         <article className="flex min-h-[460px] w-full max-w-[720px] min-w-0 flex-col overflow-hidden rounded-[18px] border-[0.5px] border-[var(--line)] bg-[var(--bg)] sm:min-h-[560px] lg:h-full lg:w-auto lg:max-w-full lg:rounded-none lg:aspect-[297/420]">
           <header className="border-b-[0.5px] border-[var(--line)] px-6 py-6 sm:px-8 sm:py-7">
             {showSkeleton ? (
@@ -141,7 +141,7 @@ export function NotebookPage({
             ) : (
               <textarea
                 aria-label="Journal entry body"
-                className="relative z-[1] h-full w-full resize-none border-0 bg-transparent px-6 pb-5 pt-5 text-[15px] font-normal text-[var(--text)] outline-none placeholder:text-[var(--muted)] [font-family:var(--font-lora),serif] sm:px-8 sm:text-[16px]"
+                className="scrollbar-gutter-stable relative z-[1] h-full w-full resize-none overflow-y-scroll border-0 bg-transparent px-6 pb-5 pt-5 text-[15px] font-normal text-[var(--text)] outline-none placeholder:text-[var(--muted)] [font-family:var(--font-lora),serif] sm:px-8 sm:text-[16px]"
                 placeholder={isLoading || !activeEntry ? "" : "Write..."}
                 value={currentContent}
                 onChange={(event) => onBodyInput(event.target.value)}
