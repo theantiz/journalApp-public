@@ -66,6 +66,7 @@ html {
   min-height: 100%;
   -webkit-text-size-adjust: 100%;
   background: linear-gradient(180deg, #f7efe1 0%, #eadcc8 100%);
+  scrollbar-gutter: stable;
 }
 
 html[data-theme="dark"] {
@@ -78,6 +79,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow-x: hidden;
+  overflow-y: scroll;
   background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%);
   color: var(--text);
 }

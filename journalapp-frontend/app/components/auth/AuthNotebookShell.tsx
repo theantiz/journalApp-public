@@ -58,9 +58,9 @@ export function AuthNotebookShell({ children }: AuthNotebookShellProps) {
             </aside>
 
             <main className="min-h-0 min-w-0 bg-[var(--bg)]">
-              <div className="flex h-full min-h-0 items-start justify-center overflow-auto p-4 lg:justify-start lg:p-0">
+              <div className="scrollbar-gutter-stable flex h-full min-h-0 items-start justify-center overflow-auto p-4 lg:justify-start lg:p-0">
                 <article className="flex min-h-[460px] w-full max-w-[720px] min-w-0 flex-col overflow-hidden rounded-[18px] border-[0.5px] border-[var(--line)] bg-[var(--bg)] sm:min-h-[560px] lg:h-full lg:w-auto lg:max-w-full lg:rounded-none lg:aspect-[297/420]">
-                  <section className="min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-8 sm:py-7">
+                  <section className="scrollbar-gutter-stable min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-8 sm:py-7">
                     <div className="mx-auto w-full max-w-[420px]">{children}</div>
                   </section>
                 </article>

@@ -36,7 +36,7 @@ export function Tooltip({
           className={`pointer-events-none absolute z-[60] inline-flex whitespace-nowrap rounded-md border border-[var(--line)] bg-[var(--surface-solid)] px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider text-[var(--muted)] shadow-[var(--shadow-soft)] [font-family:var(--font-dm-mono),monospace]
             invisible opacity-0 transition duration-75 ease-out delay-0
             group-hover/tooltip:visible group-hover/tooltip:opacity-100 group-hover/tooltip:delay-150
-            group-focus-within/tooltip:visible group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:delay-150
+            group-has-[:focus-visible]/tooltip:visible group-has-[:focus-visible]/tooltip:opacity-100 group-has-[:focus-visible]/tooltip:delay-150
             ${sideClassNames[side]} ${alignmentClassNames[align]}`}
         >
           {label}
