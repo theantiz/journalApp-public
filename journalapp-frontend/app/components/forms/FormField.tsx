@@ -21,9 +21,10 @@ export function FormField({
       {children}
       {hint ? <span className="text-[0.92rem] leading-6 text-[var(--muted)]">{hint}</span> : null}
       {/* Reserve space for error so layout doesn't shift when validation runs (fixes jitter on 2nd char) */}
-      <span className="min-h-[1.5rem] text-[0.82rem] leading-6 text-[var(--danger)] empty:invisible" aria-live="polite">
-        {error ?? ""}
+      <span className="invisible h-[1.5rem] text-[0.82rem] leading-6 text-[var(--danger)] data-[show]:visible" aria-live="polite" data-show={error}>
+        {error ?? ''}
       </span>
+
     </label>
   );
 }

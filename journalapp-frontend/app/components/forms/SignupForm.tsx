@@ -20,7 +20,7 @@ const signupSchema = z.object({
 });
 
 const inputClass =
-  "min-h-[52px] w-full rounded-[16px] border-[0.5px] border-[var(--line)] bg-[var(--surface-solid)] px-4 py-3 text-base text-[var(--text)] outline-none focus:border-[var(--line)] focus:ring-0";
+  "min-h-[52px] h-[52px] w-full rounded-[16px] border-[0.5px] border-[var(--line)] bg-[var(--surface-solid)] px-4 py-3 text-base leading-1.4 text-[var(--text)] font-inherit align-text-top outline-none focus:border-[var(--line)] focus:ring-0 transition-none resize-none";
 
 const submitButtonClass =
   "inline-flex min-h-[52px] items-center justify-center rounded-[16px] border-[0.5px] border-[var(--button-primary-bg)] bg-[var(--button-primary-bg)] px-4 py-3 text-[0.74rem] uppercase tracking-[0.2em] text-[var(--button-primary-text)] [font-family:var(--font-dm-mono),monospace] hover:bg-[var(--button-primary-hover)] disabled:cursor-progress disabled:opacity-70";

@@ -110,9 +110,21 @@ body::after {
   color: var(--text-strong);
 }
 
+/* Anti-jitter for form inputs */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  transition: none !important;
+  line-height: 1.4 !important;
+  vertical-align: top !important;
+  font-feature-settings: normal !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 a,
 button,
-input,
 textarea,
 select,
 [contenteditable="true"] {
@@ -152,7 +164,7 @@ select:focus-visible,
   background-clip: padding-box;
 }
 
-/* Reserve scrollbar space so content doesn’t shift when scrollbar appears (fixes typing jitter) */
+/* Reserve scrollbar space so content doesn't shift when scrollbar appears (fixes typing jitter) */
 .scrollbar-gutter-stable {
   scrollbar-gutter: stable;
 }
@@ -247,4 +259,3 @@ select:focus-visible,
 .journal-app textarea:focus-visible {
   box-shadow: none;
 }
-
