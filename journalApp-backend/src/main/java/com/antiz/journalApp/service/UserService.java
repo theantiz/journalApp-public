@@ -15,19 +15,43 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
+import com.antiz.journalApp.service.EmailService;
+import com.antiz.journalApp.service.RedisService;
+
+
+
+
+
+
 
 @Service
+@Slf4j
 public class UserService {
-    // business logic here
+    // business logic here - fixed compilation errors, added logging and validations
     //create e entry in MongoDB
 
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
+@Autowired
     private JournalEntryRepository journalEntryRepository;
 
-    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private RedisService redisService;
+
+    @Autowired
+    private EmailService emailService;
+
+
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+
+
+
 
 
     public void saveUser(User user) {
@@ -37,13 +61,19 @@ public class UserService {
     }
 
     public boolean saveNewUser(User user) {
+        log.info("Attempting to create new user: {}", user.getUserName());
         try {
-
+            if (userRepository.findByUserName(user.getUserName()) != null) {
+                log.warn("Attempt to create existing user: {}", user.getUserName());
+                return false;
+            }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(Arrays.asList("USER"));
             userRepository.save(user);
+            log.info("User {} created successfully", user.getUserName());
             return true;
         } catch (Exception e) {
+            log.error("Failed to create user {}: {}", user.getUserName(), e.getMessage(), e);
             return false;
         }
     }
@@ -90,6 +120,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public boolean existsByUserName(String username) {
+        return userRepository.findByUserName(username) != null;
+    }
+
     public Optional<User> findByID(ObjectId myId) {
         return userRepository.findById(myId);
     }
@@ -99,10 +133,12 @@ public class UserService {
     }
 
     public void deleteByUserName(String userName) {
+        log.info("Deleting user by name: {}", userName);
         userRepository.deleteByUserName(userName);
     }
 
-    public User findByname(String username) {
+    public User findByUserName(String username) {
+        log.info("Finding user by name: {}", username);
         return userRepository.findByUserName(username);
     }
 }

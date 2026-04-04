@@ -1,22 +1,32 @@
 package com.antiz.journalApp.controller;
 
-import com.antiz.journalApp.dto.UserDTO;
-import com.antiz.journalApp.entity.User;
-import com.antiz.journalApp.service.UserDetailsServiceImpl;
-import com.antiz.journalApp.service.UserService;
-import com.antiz.journalApp.util.JwtUtil;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.antiz.journalApp.dto.UserDTO;
+import com.antiz.journalApp.entity.User;
+import com.antiz.journalApp.service.UserDetailsServiceImpl;
+import com.antiz.journalApp.service.UserService;
+import com.antiz.journalApp.util.JwtUtil;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/public")
@@ -64,6 +74,16 @@ public class PublicController {
             log.error("Signup failed for user: {}", userDTO.getUserName(), e);
             return new ResponseEntity<>("Registration failed", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/check-username/{username}")
+    @Operation(summary = "Check username availability")
+    public ResponseEntity<Map<String, Object>> checkUsernameAvailability(@PathVariable String username) {
+        boolean taken = userService.existsByUserName(username);
+        Map<String, Object> response = new HashMap<>();
+        response.put("available", !taken);
+        response.put("message", taken ? "Username is taken" : "Username is available");
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")

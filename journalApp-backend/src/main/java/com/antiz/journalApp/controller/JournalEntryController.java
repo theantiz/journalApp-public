@@ -48,7 +48,7 @@ public class JournalEntryController {
     public ResponseEntity<List<JournalEntry>> getAllJournalEntriesOfUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        User user = userService.findByname(userName);
+        User user = userService.findByUserName(userName);
         List<JournalEntry> all = user.getJournalEntries();
         if (all != null && !all.isEmpty()) {
             return new ResponseEntity<>(all, HttpStatus.OK);
@@ -94,7 +94,7 @@ public class JournalEntryController {
         ObjectId id = new ObjectId(myId);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        User user = userService.findByname(userName);
+        User user = userService.findByUserName(userName);
 
         List<JournalEntry> collect = user.getJournalEntries().stream()
                 .filter(x -> x.getId().equals(id)).collect(Collectors.toList());
@@ -142,7 +142,7 @@ public class JournalEntryController {
                                                           @RequestBody JournalEntry newEntry) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        User user = userService.findByname(userName);
+        User user = userService.findByUserName(userName);
         ObjectId entryId = new ObjectId(myId);
 
         List<JournalEntry> collect = user.getJournalEntries().stream()

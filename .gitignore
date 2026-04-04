@@ -33,3 +33,4 @@ journalapp-frontend/*.tsbuildinfo
 # Local deployment / cache artifacts
 .vercel/
 .pnpm-store/
+journalApp-backend/src/main/java/com/antiz/journalApp/service/TODO.md

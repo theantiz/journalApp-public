@@ -26,7 +26,7 @@ public class JournalEntryService {
     @Transactional // meaning all the loc inside this method treats this as single operation  will make container & if any error data will get rollback
     public JournalEntry saveEntry(JournalEntry journalEntry, String userName) { //created a transactional method
       try {
-          User user = userService.findByname(userName);
+          User user = userService.findByUserName(userName);
           if (user == null) {
               throw new IllegalArgumentException("user not found");
           }
@@ -72,7 +72,7 @@ public class JournalEntryService {
         try {
 
 
-        User user = userService.findByname(userName);
+        User user = userService.findByUserName(userName);
             removed = user.getJournalEntries().removeIf(x -> x.getId().equals(myId));
 
             if (removed) {

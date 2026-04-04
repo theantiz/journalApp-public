@@ -123,7 +123,7 @@ public class UserController {
     })
     public ResponseEntity<UserProfileResponse> getCurrentUserProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = userService.findByname(authentication.getName());
+        User currentUser = userService.findByUserName(authentication.getName());
 
         if (currentUser == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

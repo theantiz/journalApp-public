@@ -44,7 +44,7 @@ class JournalEntryServiceTest {
         entry.setContent("I feel calm and grateful.");
         ObjectId entryId = new ObjectId();
 
-        when(userService.findByname("alex")).thenReturn(user);
+        when(userService.findByUserName("alex")).thenReturn(user);
         when(sentimentAnalysisService.analyze("Solid day", "I feel calm and grateful.")).thenReturn(Sentiment.HAPPY);
         when(journalEntryRepository.save(entry)).thenAnswer(invocation -> {
             entry.setId(entryId);
@@ -70,7 +70,7 @@ class JournalEntryServiceTest {
         entry.setContent("Mostly meetings.");
         entry.setSentiment(Sentiment.SAD);
 
-        when(userService.findByname("alex")).thenReturn(user);
+        when(userService.findByUserName("alex")).thenReturn(user);
         when(journalEntryRepository.save(entry)).thenReturn(entry);
 
         journalEntryService.saveEntry(entry, "alex");
@@ -96,7 +96,7 @@ class JournalEntryServiceTest {
         entry.setTitle("Stress log");
         entry.setContent("I was worried and overwhelmed.");
 
-        when(userService.findByname("alex")).thenReturn(user);
+        when(userService.findByUserName("alex")).thenReturn(user);
         when(sentimentAnalysisService.analyze("Stress log", "I was worried and overwhelmed.")).thenReturn(Sentiment.ANXIOUS);
         when(journalEntryRepository.save(entry)).thenReturn(entry);
 

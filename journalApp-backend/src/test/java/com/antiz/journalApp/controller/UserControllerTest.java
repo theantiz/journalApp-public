@@ -49,7 +49,7 @@ class UserControllerTest {
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken("alex", null)
         );
-        when(userService.findByname("alex")).thenReturn(user);
+        when(userService.findByUserName("alex")).thenReturn(user);
 
         ResponseEntity<UserProfileResponse> response = userController.getCurrentUserProfile();
         UserProfileResponse responseBody = response.getBody();

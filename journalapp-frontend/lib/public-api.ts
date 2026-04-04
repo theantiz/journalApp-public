@@ -42,3 +42,9 @@ export async function signupUser(values: SignupValues) {
     auth: false,
   });
 }
+
+export async function checkUsernameAvailable(username: string): Promise<{available: boolean; message?: string}> {
+  return apiRequest<{available: boolean; message?: string}>(`/journal/public/check-username/${encodeURIComponent(username)}`, {
+    auth: false,
+  });
+}
