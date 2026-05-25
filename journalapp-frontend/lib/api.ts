@@ -1,5 +1,5 @@
 import { getToken, removeToken } from "./auth";
-import { API_BASE_URL } from "./endpoints";
+import { getApiBaseUrl } from "./endpoints";
 
 type ApiRequestOptions = RequestInit & {
   auth?: boolean;
@@ -62,7 +62,7 @@ export async function apiRequest<T>(
   let response: Response;
 
   try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
+    response = await fetch(`${getApiBaseUrl()}${path}`, {
       ...requestOptions,
       cache: "no-store",
       headers,
