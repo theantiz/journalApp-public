@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: journalapp-backend
+    env: docker
+    rootDir: journalApp-backend
+    plan: starter
+    autoDeploy: true
+    healthCheckPath: /journal/public/health-check
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
