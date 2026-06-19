@@ -1,17 +1,5 @@
 export function getApiBaseUrl(): string {
-  const apiBaseUrl = (globalThis as typeof globalThis & {
-    process?: {
-      env?: {
-        NEXT_PUBLIC_API_BASE_URL?: string;
-      };
-    };
-  }).process?.env?.NEXT_PUBLIC_API_BASE_URL;
-
-  if (!apiBaseUrl) {
-    throw new Error("NEXT_PUBLIC_API_BASE_URL is not set");
-  }
-
-  return apiBaseUrl.replace(/\/$/, "");
+  return "https://journalappapi-gwd2g7c8fdc5g9fw.centralindia-01.azurewebsites.net";
 }
 
 export const ENDPOINTS = {
