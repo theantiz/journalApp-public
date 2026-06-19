@@ -2,7 +2,7 @@ spring:
   config:
     import: optional:file:.env[.properties],optional:file:../.env[.properties]
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
+    active: ${SPRING_PROFILES_ACTIVE}
 
   mail:
     host: ${SPRING_MAIL_HOST:localhost}
